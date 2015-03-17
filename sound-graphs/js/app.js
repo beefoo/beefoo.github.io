@@ -17,12 +17,17 @@
       // show button when all is ready
       $.when(this.midi_loaded, this.data_loaded).done(function() {
         $('#loading').hide();
-        $('#audio-graph').show();
+        $('#graph-play').show();
       });
       
       // init play button
-      $('#audio-graph').on('click', function(){
+      $('#graph-play').on('click', function(){
         _this.play();
+      });
+      
+      // init stop button
+      $('#graph-stop').on('click', function(){
+        _this.stop();
       });
       
       // load midi
@@ -102,8 +107,11 @@
       }
       
       var _this = this,
-          $button = $('#audio-graph'),
+          $button = $('#graph-play'),
           data = this.data;
+          
+      $button.hide();
+      $('#graph-stop').show();
       
       // intro text
       var summary = {};
@@ -125,7 +133,9 @@
           velocity = this.options.midi_velocity,
           delay = this.options.midi_delay,
           range = this.options.midi_range,
-          ms_per_value = this.options.ms_per_value;     
+          ms_per_value = this.options.ms_per_value,
+          data_labels = this.options.data_labels,
+          label_every = parseInt(Math.floor(data.length / data_labels)); 
       MIDI.setVolume(0, volume);
       
       // speak summary
@@ -158,14 +168,23 @@
         
         var playQueue = [];
         
-        data.forEach(function(row){          
+        data.forEach(function(row, i){          
           playQueue.push(function(next){
             var percent = (row.value - min) / (max - min),
                 note = Math.round((range[1]-range[0]) * percent + range[0]);
             MIDI.noteOn(0, note, velocity, 0);
             MIDI.noteOff(0, note, delay);
+            if (i % label_every == 0) {
+              _this.speek(''+row.date.getFullYear());
+            }
             setTimeout(function(){ next(); }, ms_per_value); 
           });
+        });
+        
+        playQueue.push(function(next){
+          $('#graph-stop').hide();
+          $('#graph-play').show();          
+          next();
         });
         
         $('body').queue("notes", playQueue).dequeue("notes");
@@ -174,10 +193,6 @@
               
       })
       .dequeue( "summary" );
-    };
-    
-    App.prototype.playNote = function(note, next){
-      
     };
     
     App.prototype.speek = function(message, next){
@@ -190,33 +205,32 @@
       window.speechSynthesis.speak(utterance);
     };
     
-    App.prototype.msToString = function(milliseconds){     
+    App.prototype.stop = function(){
+      $('body').clearQueue("notes");
+      $('body').stop("notes");
+      $('body').clearQueue("summary");      
+      $('body').stop("summary");
+      $('#graph-stop').hide();
+      $('#graph-play').show(); 
+    };
+    
+    App.prototype.msToString = function(ms){
+      var s = Math.floor((ms/1000) % 60);
+      var m = Math.floor((ms/(1000*60)) % 60);
+      var h = Math.floor((ms/(1000*60*60)) % 24);
+      var units = [];
+      
       function numberEnding (number) {
         return (number > 1) ? 's' : '';
-      }  
-      var temp = Math.floor(milliseconds / 1000);
-      var years = Math.floor(temp / 31536000);
-      if (years) {
-          return years + ' year' + numberEnding(years);
       }
-      //TODO: Months! Maybe weeks? 
-      var days = Math.floor((temp %= 31536000) / 86400);
-      if (days) {
-          return days + ' day' + numberEnding(days);
-      }
-      var hours = Math.floor((temp %= 86400) / 3600);
-      if (hours) {
-          return hours + ' hour' + numberEnding(hours);
-      }
-      var minutes = Math.floor((temp %= 3600) / 60);
-      if (minutes) {
-          return minutes + ' minute' + numberEnding(minutes);
-      }
-      var seconds = temp % 60;
-      if (seconds) {
-          return seconds + ' second' + numberEnding(seconds);
-      }
-      return 'less than a second'; //'just now' //or other string you like;
+      
+      if (h) units.push(h + ' hour' + numberEnding(h));      
+      if (m) units.push(m + ' minute' + numberEnding(m));      
+      if (s) units.push(s + ' second' + numberEnding(s));
+      
+      var str = units.join(', ');
+         
+      return str;
     };
     
     return App;

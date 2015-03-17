@@ -3,5 +3,6 @@ var config = {
   midi_range: [21, 108],
   midi_volume: 127,
   midi_velocity: 127,
-  midi_delay: 0.75
+  midi_delay: 0.75,
+  data_labels: 12
 };

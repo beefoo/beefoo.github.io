@@ -20,13 +20,15 @@
     
     <div id="visual-graph" class="graph"></div>
     
-    <p>An audio summary and sonified graph for the visually impaired:</p>
+    <p>An audio summary (using the <a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html#tts-section">Speech Synthesis API</a>) and sonified graph (using <a href="https://github.com/mudcube/MIDI.js/">MIDI.js</a>) for the visually impaired:</p>
     
     <p id="loading"><em>loading...</em></p>
     
-    <button id="audio-graph" class="hide"
+    <button id="graph-play" class="hide"
       data-summary="This is a graph of carbon dioxide parts per million from 1958 to 2015"
       data-pitch-label="Carbon dioxide parts per million">Play Graph</button>
+      
+    <button id="graph-stop" class="hide">Stop Graph</button>
   
   </div>
   
