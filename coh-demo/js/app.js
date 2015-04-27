@@ -73,6 +73,7 @@
       console.log('SoundManager ready.');
       var _this = this;
       this.players = {};
+      this.playing_id = false;
       
       $('.slide[data-audio]').each(function(){
         var url = $(this).attr('data-audio'),
@@ -80,7 +81,10 @@
         var player = soundManager.createSound({
           url: url,
           autoLoad: true,
-          autoPlay: false
+          autoPlay: false,
+          onfinish: function() {
+            _this.playing_id = false;
+          }
         });
         _this.players[id] = player;
       });
@@ -109,11 +113,19 @@
       $('.slide').removeClass('active');
       $active.addClass('active');
       window.location.hash = '#' + $active.attr('id');
+      
+      // center copy
+      var $copy = $active.find('.slide-copy'),
+          copyHeight = $copy.height();          
+      $copy.css({
+        'top': '50%',
+        'margin-top': '-'+(copyHeight/2)+'px'
+      });
     };
     
     App.prototype.togglePlay = function(){
       var $active = $(".slide.active").first(),
-          id = $active.attr('id'),
+          id = this.playing_id || $active.attr('id'),
           player = this.players[id];
           
       if (!player) return;
@@ -121,11 +133,13 @@
       if ($active.hasClass('playing')) {
         $active.removeClass('playing');
         player.pause();
+        this.playing_id = false;
         
       } else {
         player.setPosition(0);
         player.play();
         $active.addClass('playing');
+        this.playing_id = id;
       }
     }
     

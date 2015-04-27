@@ -61,6 +61,38 @@ a:active {
         margin-bottom: 0.5em;
       }
     }
+    
+    &.bg-center-no-repeat {
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    &.bg-full-width {
+      background-size: 100% auto;
+    }
+    
+    &.bg-full-height {
+      background-size: auto 100%;
+    }
+    
+    .iframe-wrapper {
+      width: 800px;
+      height: 600px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -300px;
+      margin-left: -400px;      
+    }
+    
+    iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
   }
 }
 
@@ -71,10 +103,24 @@ a:active {
   position: absolute;
   left: 50%;
   top: 10%;
-  margin-left: -40%;
-  padding: 20px;
+  margin-left: -40%;  
   font-size: 2.4em;
-  background: rgba(0,0,0,0.95);
+  text-align: center;
+  
+  &.box {
+    padding: 20px;
+    background: rgba(0,0,0,0.95);
+  }
+  
+  &.big {
+    font-size: 3em;
+  }
+  
+  &.one-liner {
+    h2 {
+      margin-bottom: 0;
+    }
+  }
 }
 
 #slide-title {
@@ -98,9 +144,6 @@ a:active {
   background-size: auto 100%;
 }
 
-#slide-charlsie {
-  background: center no-repeat;
-}
 
 
 
