@@ -1,0 +1,92 @@
+@import "../css/vendor/normalize.css";
+
+@mixin animation($animation) {
+  -webkit-animation: $animation;
+  animation:         $animation;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}
+
+@mixin transform($params) {
+  -webkit-transform: $params;
+  transform:         $params;
+}
+
+@include keyframes(fade-in) {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container {
+  width: 1020px;
+  height: 600px;
+  margin: 20px auto 0;
+}
+
+.chart {
+  width: 400px;
+  height: 600px;
+  float: left;
+  background: url(../img/seating_chart.png) no-repeat;
+  position: relative;
+  
+  .seat-group {
+    display: none;
+    
+    &.active {
+      display: block;
+    }
+  }
+}
+
+.seat, .marker, .zip {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(#fc1e8d, 0.2);
+  position: absolute;
+}
+
+.map {
+  width: 600px;
+  height: 600px;
+  float: right;
+  background: url(../img/new_york_map.png) no-repeat;
+  position: relative;
+}
+
+.zip {
+  background: rgba(#91e226, 0.6);
+}
+
+.marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: rgba(#fc1e8d, 0.6);
+  display: none;
+  
+  &.active {
+    display: block;
+  }
+}
+
