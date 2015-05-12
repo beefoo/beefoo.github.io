@@ -144,15 +144,15 @@
         flashVersion: 9,
         preferFlash: false,
         onready: function() {
-          _.each(INSTRUMENTS, function(url){
+          _.each(INSTRUMENTS, function(url, i){
             var instrument = soundManager.createSound({
-              id: url,
+              id: 'instrument'+i,
               url: url,
               autoLoad: true,
               autoPlay: true,
               volume: 0,
               onfinish: function() {
-                soundManager.play(url); 
+                soundManager.play('instrument'+i); 
               }
             });
             _this.instruments.push(instrument);
