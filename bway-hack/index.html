@@ -13,10 +13,23 @@
 <body>
   
   <div class="container">
+    <h1>Where We Sit<br />
+    <small>An experiment by <a href="http://brianfoo.com">Brian Foo</a> at the NYPL's <a href="http://www.nypl.org/events/programs/2015/05/11/broadway-hackathon">Broadway Hackathon</a></small>
+    </h1>
+    
+    <p>This simple interface takes data from the <a href="http://archives.nyphil.org/index.php/open-data">New York Philharmonic Subscribers Database</a> from 1953 to 1980
+      and to show where one might sit in the concert hall based on where they live in New York City. Hover over the areas on the right, and the approximate
+      seating areas will highlight on the left. The more seats that are positioned closer to the stage, the louder the music you will hear.
+      <a href="https://github.com/beefoo/bway-hack">Code can be found here</a>. 
+    </p>
+  </div>
+  
+  <div class="container">
     <div id="chart" class="chart"></div>
     <div id="map" class="map">
       <div id="marker" class="marker"></div>
     </div>
+    <br class="clearfix" />
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

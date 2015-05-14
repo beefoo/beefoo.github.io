@@ -36,10 +36,14 @@
   }
 }
 
+a, a:hover, a:visited, a:active {
+  color: #d30202;
+}
+
 .container {
   width: 1020px;
-  height: 600px;
-  margin: 20px auto 0;
+  margin: 20px auto;
+  padding-bottom: 20px;
 }
 
 .chart {
@@ -88,5 +92,11 @@
   &.active {
     display: block;
   }
+}
+
+.clearfix {
+  clear: both;
+  overflow: auto;
+  zoom: 1;
 }
 
