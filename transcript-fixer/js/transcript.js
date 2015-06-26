@@ -99,6 +99,16 @@
       $('html, body').animate({scrollTop: scrollOffset}, 500);
     };
     
+    App.prototype.clearSelected = function(){
+      var $part = $('.part.active').first(),
+          end = Math.round($part.attr('data-end') * 1000);
+          
+      this.player.clearOnPosition(end);
+      if (!this.player.paused || this.player.playState > 0) {
+        this.player.pause();
+      } 
+    };
+    
     App.prototype.next = function(){      
       this.select(this.part_index+1);
     };
@@ -133,6 +143,10 @@
     };
     
     App.prototype.select = function(i){
+      if ($('.part.active').length > 0) {
+        this.clearSelected();
+      }
+      
       this.part_index = i;
       
       if (this.part_index < 0)
