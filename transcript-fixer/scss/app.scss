@@ -1,0 +1,58 @@
+@import "../css/vendor/normalize.css";
+@import "mixins";
+@import "variables";
+@import "keyframes";
+
+a {
+  color: $linkColor;
+  text-decoration: none;
+  
+  &:hover, &:active {
+    color: $linkColorHover;
+  }
+}
+
+.transcripts {
+  a {
+    display: inline-block;
+    padding: 0.5em;
+    margin: 0.5em;
+    border: 1px solid $grayLighter;
+    background: lighten($grayLightest, 3%);
+    
+    &:hover {
+      background: lighten($grayLightest, 6%);
+      border-color: $grayLight;
+    }
+  }
+}
+
+.transcript {
+  
+  margin-top: 1000px;
+  margin-bottom: 1000px;
+  
+  .part {
+    position: relative;
+    text-align: center;    
+    border-bottom: 1px solid $grayLightest;    
+    
+    input {
+      display: inline-block;
+      text-align: center;
+      border: 0;
+      padding: 1em 0;
+      font-size: 2em;
+      line-height: 1;
+      color: $grayLight;
+      width: 100%;
+    }
+    
+    &.active {
+      input {
+        color: $grayDarkest;
+      }
+    }
+    
+  }
+}

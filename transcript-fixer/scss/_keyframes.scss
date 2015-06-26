@@ -1,0 +1,70 @@
+@import "mixins";
+
+@include keyframes(fadeInDown) {
+  0% {
+    @include opacity(0);
+    @include transform(translate3d(0, -100%, 0));
+  }
+  100% {
+    @include opacity(1);
+    @include transform(none);
+  }
+}
+
+@include keyframes(rise) {
+  0% {    
+    @include opacity(1);
+    @include transform(none);
+  }
+  100% {
+    @include opacity(0);
+    @include transform(translate3d(0, -1000%, 0));
+  }
+}
+@include keyframes(fall) {
+  0% {    
+    @include opacity(0);    
+    @include transform(translate3d(0, -1000%, 0));
+  }
+  100% {
+    @include opacity(0.5);
+    @include transform(none);
+  }
+}
+@include keyframes(traverse) {
+  0% {    
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@include keyframes(traverse-reverse) {
+  0% {    
+    right: 0;
+  }
+  100% {
+    right: 100%;
+  }
+}
+@include keyframes(throw) {
+  0% {
+    @include transform(rotate(0deg));
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+  }
+  50% {
+    @include transform(rotate(180deg));
+    bottom: 100%;
+    left: 50%;
+    opacity: 0.8;
+  }
+  100% {
+    @include transform(rotate(360deg));
+    bottom: 0;
+    left: 100%;
+    opacity: 0;
+  }
+}
+
