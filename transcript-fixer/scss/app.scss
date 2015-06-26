@@ -35,7 +35,7 @@ a {
   .part {
     position: relative;
     text-align: center;    
-    border-bottom: 1px solid $grayLightest;    
+    // border-bottom: 1px solid $grayLightest;    
     
     input {
       display: inline-block;
@@ -44,11 +44,18 @@ a {
       padding: 1em 0;
       font-size: 2em;
       line-height: 1;
-      color: $grayLight;
+      color: $grayLighter;
       width: 100%;
+      
+      &:focus {
+        outline: none;
+      }
     }
     
     &.active {
+      z-index: 100;
+      @include box-shadow(1px, 1px, 0, 2400px, rgba(0,0,0,0.4));
+      
       input {
         color: $grayDarkest;
       }
