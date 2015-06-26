@@ -40,7 +40,7 @@
       });
       
       $('#transcript').on('click', '.part', function(e){
-        var i = $('#transcript').index($(this));
+        var i = $('#parts .part').index($(this));
         _this.select(i);
       });
     };
@@ -62,7 +62,7 @@
     App.prototype.initTranscript = function(){
       var _this = this,
           id = this._getParameterByName('id'),
-          $container = $('<div class="parts"></div>');
+          $container = $('<div id="parts" class="parts"></div>');
           
       this.part_index = -1;
       
@@ -114,9 +114,11 @@
     };
     
     App.prototype.onSoundManagerReady = function(item){
-      var protocol = window.location.protocol != "https:" ? 'http:' : 'https:';
+      var protocol = window.location.protocol != "https:" ? 'http://' : 'https://',
+          path = this._getParameterByName('path') || 's3.amazonaws.com/oral-history/';
+          
       this.player = soundManager.createSound({
-        url: protocol+'//s3.amazonaws.com/oral-history/audio/' + item.audio_file_name,
+        url: protocol+path+'audio/' + item.audio_file_name,
         autoLoad: true,
         autoPlay: false
       });

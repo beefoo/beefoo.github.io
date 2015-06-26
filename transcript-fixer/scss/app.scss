@@ -29,12 +29,13 @@ a {
 
 .transcript {
   
-  margin-top: 1000px;
-  margin-bottom: 1000px;
+  border-top: 1000px solid $grayLightest;
+  border-bottom: 1000px solid $grayLightest;
   
   .part {
     position: relative;
-    text-align: center;    
+    text-align: center;
+    background: $grayLightest;
     // border-bottom: 1px solid $grayLightest;    
     
     input {
@@ -44,6 +45,7 @@ a {
       padding: 1em 0;
       font-size: 2em;
       line-height: 1;
+      background: $grayLightest;
       color: $grayLighter;
       width: 100%;
       
@@ -54,10 +56,12 @@ a {
     
     &.active {
       z-index: 100;
-      @include box-shadow(1px, 1px, 0, 2400px, rgba(0,0,0,0.4));
+      background: $white;
+      // @include box-shadow(1px, 1px, 0, 2400px, rgba(0,0,0,0.4));
       
       input {
         color: $grayDarkest;
+        background: $white;
       }
     }
     
