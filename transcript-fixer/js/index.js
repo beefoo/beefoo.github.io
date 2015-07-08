@@ -16,7 +16,7 @@
         
         var $container = $('<div />');
         $.each(transcripts, function(i, t){
-          $container.append($('<a href="transcript.html?id='+t.item_id+'">'+t.item_title+' ('+t.item_duration_f+')</a>'));
+          $container.append($('<a href="transcript.html?id='+t.item_id+'" title="'+t.item_title+' ('+t.item_duration_f+')">'+t.item_title+' ('+t.item_duration_f+')</a>'));
         });
         $('#transcripts').append($container);        
       });

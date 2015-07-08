@@ -71,7 +71,7 @@
         
         $.each(item.transcript.parts, function(i, p){
           if (p.text.length > 1) {
-            $container.append($('<div id="part-'+p.id+'" class="part" data-start="'+p.start_time+'" data-end="'+p.end_time+'"><input type="text" value="'+p.text+'" /></div>'));
+            $container.append($('<div id="part-'+p.id+'" class="part" data-start="'+p.start_time+'" data-end="'+p.end_time+'"><input type="text" value="'+p.text+'" /><div class="time-label">'+_this._formatTime(p.start_time,2)+'</div></div>'));
           }            
         });    
         $('#transcript').append($container);
@@ -195,11 +195,30 @@
       }
     };
     
+    App.prototype._formatTime = function(seconds, dec) {
+      var s = seconds || 0, 
+          h = parseInt( s / 3600 ) % 24,
+          m = parseInt( s / 60 ) % 60,
+          s = this._round( s % 60, dec ),
+          string;
+      // create format hh:mm:ss
+      string = (h > 0 ? h + ':' : '') + (m < 10 ? '0' + m : m ) + ':' + (s < 10 ? '0' + s : s);
+      // remove starting zeros
+      if ( string[0] == '0' ) string = string.substring(1, string.length);
+      return string;
+    };
+    
     App.prototype._getParameterByName = function(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
           results = regex.exec(location.search);
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    };
+    
+    App.prototype._round = function(num, dec) {
+      num = parseFloat( num );
+      dec = dec || 0;
+      return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
     };
     
     return App;
