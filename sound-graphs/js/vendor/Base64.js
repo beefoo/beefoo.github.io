@@ -5,7 +5,7 @@
 (function (window) {
 
 	var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-	
+
 	window.btoa || (window.btoa = function encode64(input) {
 		input = escape(input);
 		var output = "";
@@ -31,7 +31,7 @@
 		} while (i < input.length);
 		return output;
 	});
-	
+
 	window.atob || (window.atob = function(input) {
 		var output = "";
 		var chr1, chr2, chr3 = "";

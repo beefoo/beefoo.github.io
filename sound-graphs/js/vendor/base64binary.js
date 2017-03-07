@@ -24,7 +24,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
- 
+
 var Base64Binary = {
 	_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
 
@@ -39,8 +39,8 @@ var Base64Binary = {
 
 	decode: function(input, arrayBuffer) {
 		//get last chars to see if are valid
-		var lkey1 = this._keyStr.indexOf(input.charAt(input.length-1));		 
-		var lkey2 = this._keyStr.indexOf(input.charAt(input.length-1));		 
+		var lkey1 = this._keyStr.indexOf(input.charAt(input.length-1));
+		var lkey2 = this._keyStr.indexOf(input.charAt(input.length-1));
 
 		var bytes = Math.ceil( (3*input.length) / 4.0);
 		if (lkey1 == 64) bytes--; //padding chars, so skip
@@ -59,7 +59,7 @@ var Base64Binary = {
 
 		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 
-		for (i=0; i<bytes; i+=3) {	
+		for (i=0; i<bytes; i+=3) {
 			//get the 3 octects in 4 ascii chars
 			enc1 = this._keyStr.indexOf(input.charAt(j++));
 			enc2 = this._keyStr.indexOf(input.charAt(j++));
@@ -70,11 +70,11 @@ var Base64Binary = {
 			chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
 			chr3 = ((enc3 & 3) << 6) | enc4;
 
-			uarray[i] = chr1;			
+			uarray[i] = chr1;
 			if (enc3 != 64) uarray[i+1] = chr2;
 			if (enc4 != 64) uarray[i+2] = chr3;
 		}
 
-		return uarray;	
+		return uarray;
 	}
 };
